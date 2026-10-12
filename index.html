@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#07090c">
+<meta name="description" content="Tempa web jadi APK Android asli dengan kustomisasi identitas, splash dinamis, dan penandatanganan aman.">
+<title>DelpharaW2A — Liquid Forge</title>
+<style>
+:root{
+  --hue:195;
+  --accent:hsl(var(--hue) 90% 62%);
+  --accent-soft:hsl(var(--hue) 90% 62% / .14);
+  --bg:#07090c;
+  --panel:#0e1217;
+  --line:#1c232c;
+  --text:#e8edf2;
+  --muted:#7f8b98;
+  --radius:16px;
+}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{
+  background:
+    radial-gradient(900px 500px at 85% -10%, hsl(var(--hue) 80% 40% / .22), transparent 60%),
+    radial-gradient(700px 400px at -10% 30%, hsl(calc(var(--hue) + 60) 70% 35% / .14), transparent 60%),
+    var(--bg);
+  background-attachment:fixed;
+  color:var(--text);
+  font:15px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  min-height:100vh;
+  padding:0 0 120px;
+}
+.wrap{max-width:720px;margin:0 auto;padding:0 20px}
+header.top{display:flex;align-items:center;justify-content:space-between;padding:22px 0}
+.brand{display:flex;align-items:baseline;gap:10px}
+.brand b{font-size:18px;letter-spacing:.2px}
+.brand small{color:var(--muted);font-size:12px}
+.swatch-btn{
+  width:34px;height:34px;border-radius:50%;border:1px solid var(--line);
+  background:conic-gradient(from 0deg,hsl(0 90% 60%),hsl(60 90% 60%),hsl(120 90% 55%),hsl(180 90% 55%),hsl(240 90% 65%),hsl(300 90% 60%),hsl(360 90% 60%));
+  cursor:pointer;
+}
+h1{
+  font-size:clamp(34px,8vw,54px);line-height:1.04;letter-spacing:-1.2px;margin:26px 0 14px;
+  font-weight:700;
+}
+h1 em{font-style:italic;color:var(--accent);font-weight:700}
+.lede{color:var(--muted);max-width:52ch;margin-bottom:34px}
+
+section.card{
+  background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.012));
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:22px;margin-bottom:16px;
+}
+.card h3{display:flex;align-items:center;gap:12px;font-size:17px;margin-bottom:18px}
+.num{
+  font:600 12px ui-monospace,Menlo,monospace;color:var(--accent);
+  border:1px solid var(--accent);border-radius:999px;padding:2px 8px;
+}
+label.f{display:block;margin-bottom:14px}
+label.f>span{display:block;color:var(--muted);font-size:12.5px;margin-bottom:6px}
+input[type=text],input[type=url],input[type=number]{
+  width:100%;background:#0a0d11;border:1px solid var(--line);color:var(--text);
+  border-radius:12px;padding:12px 14px;font:inherit;outline:none;
+}
+input:focus-visible{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.row{display:flex;gap:10px}
+.row>*{flex:1}
+.btn{
+  background:#12171d;border:1px solid var(--line);color:var(--text);
+  border-radius:12px;padding:11px 16px;font:inherit;cursor:pointer;
+}
+.btn:hover{border-color:var(--accent)}
+.btn:focus-visible,.chip:focus-visible,.seg button:focus-visible,.toggle:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.btn.primary{
+  background:var(--accent);color:#04161a;border-color:transparent;font-weight:700;
+}
+.input-with{display:flex;gap:8px}
+.input-with input{flex:1}
+
+.icon-row{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.icon-prev{
+  width:84px;height:84px;border-radius:20px;border:1px solid var(--line);
+  background:var(--accent-soft);display:grid;place-items:center;overflow:hidden;
+  font-size:36px;font-weight:700;color:var(--accent);
+}
+.icon-prev img{width:100%;height:100%;object-fit:cover}
+.icon-actions{display:flex;flex-direction:column;gap:8px;align-items:flex-start}
+.hint{color:var(--muted);font-size:12.5px}
+
+.chips-head{display:flex;justify-content:space-between;color:var(--muted);font-size:12.5px;margin-bottom:10px}
+.chips{display:flex;gap:8px;overflow-x:auto;padding-bottom:10px;scroll-snap-type:x proximity}
+.chip{
+  flex:0 0 auto;scroll-snap-align:start;background:#0a0d11;border:1px solid var(--line);
+  color:var(--text);border-radius:999px;padding:8px 16px;font:inherit;cursor:pointer;
+}
+.chip[aria-pressed=true]{background:var(--accent-soft);border-color:var(--accent);color:var(--accent)}
+
+.dur{display:flex;align-items:center;gap:14px}
+.dur input[type=range]{flex:1}
+input[type=range]{accent-color:var(--accent)}
+.dur output{font:600 13px ui-monospace,monospace;color:var(--accent);min-width:70px;text-align:right}
+
+.phone{
+  margin:18px auto 8px;width:210px;height:380px;border-radius:30px;
+  border:1px solid var(--line);position:relative;overflow:hidden;
+  background:radial-gradient(circle at 50% 30%,hsl(var(--hue) 60% 22%),#06080b 75%);
+  display:grid;place-items:center;
+}
+.sp{display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center;padding:20px;width:100%}
+.sp-logo{
+  width:72px;height:72px;border-radius:18px;background:var(--accent);color:#04161a;
+  display:grid;place-items:center;font-size:30px;font-weight:800;overflow:hidden;
+}
+.sp-logo img{width:100%;height:100%;object-fit:cover}
+.sp-title{font-weight:700;font-size:17px}
+.sp-sub{color:#b4bfca;font-size:12px;min-height:1.2em}
+.sp-bar{width:120px;height:4px;border-radius:4px;background:rgba(255,255,255,.12);overflow:hidden}
+.sp-bar i{display:block;height:100%;width:0;background:var(--accent)}
+.sp-spin{width:26px;height:26px;border-radius:50%;border:3px solid rgba(255,255,255,.15);border-top-color:var(--accent)}
+.sp-dots{display:flex;gap:6px}
+.sp-dots i{width:8px;height:8px;border-radius:50%;background:var(--accent);opacity:.3}
+.sp-line{width:0;height:2px;background:var(--accent)}
+.replay{display:block;margin:6px auto 0}
+.note{color:var(--muted);font-size:12.5px;text-align:center;margin-top:12px}
+
+/* animasi splash */
+.a-fade .sp{animation:fadeIn var(--d) ease both}
+.a-zoom .sp-logo{animation:zoomIn var(--d) cubic-bezier(.2,.9,.3,1.2) both}
+.a-slide .sp{animation:slideUp var(--d) ease both}
+.a-bounce .sp-logo{animation:bounce var(--d) ease both}
+.a-pulse .sp-logo{animation:pulse calc(var(--d)/2.5) ease-in-out infinite}
+.a-shake .sp-logo{animation:shake calc(var(--d)/3) ease-in-out infinite}
+.a-spinner .sp-spin{animation:spin .8s linear infinite}
+.a-progress .sp-bar i{animation:fill var(--d) ease forwards}
+.a-dots .sp-dots i{animation:dot .9s ease-in-out infinite}
+.a-dots .sp-dots i:nth-child(2){animation-delay:.15s}
+.a-dots .sp-dots i:nth-child(3){animation-delay:.3s}
+.a-line .sp-line{animation:line var(--d) ease forwards}
+.a-gradient{background:linear-gradient(160deg,hsl(var(--hue) 80% 30%),hsl(calc(var(--hue) + 70) 70% 25%),#05070a)!important;background-size:200% 200%;animation:grad var(--d) ease infinite}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes zoomIn{from{transform:scale(.2);opacity:0}to{transform:scale(1);opacity:1}}
+@keyframes slideUp{from{transform:translateY(50px);opacity:0}to{transform:none;opacity:1}}
+@keyframes bounce{0%{transform:translateY(-120px)}50%{transform:translateY(0)}65%{transform:translateY(-26px)}80%{transform:translateY(0)}90%{transform:translateY(-8px)}100%{transform:translateY(0)}}
+@keyframes pulse{50%{transform:scale(1.14)}}
+@keyframes shake{0%,100%{transform:rotate(0)}25%{transform:rotate(-8deg)}75%{transform:rotate(8deg)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes fill{to{width:100%}}
+@keyframes dot{50%{opacity:1;transform:translateY(-6px)}}
+@keyframes line{to{width:120px}}
+@keyframes grad{50%{background-position:100% 100%}}
+@media (prefers-reduced-motion:reduce){.phone *,.phone{animation-duration:.01s!important;animation-iteration-count:1!important}}
+
+.seg{display:flex;gap:6px;margin-bottom:16px}
+.seg button{
+  flex:1;background:#0a0d11;border:1px solid var(--line);color:var(--text);
+  padding:10px;border-radius:12px;font:inherit;cursor:pointer;
+}
+.seg button[aria-pressed=true]{border-color:var(--accent);background:var(--accent-soft);color:var(--accent)}
+.toggle{
+  width:100%;display:flex;justify-content:space-between;align-items:center;gap:14px;text-align:left;
+  background:#0a0d11;border:1px solid var(--line);color:var(--text);
+  border-radius:12px;padding:12px 14px;margin-bottom:8px;font:inherit;cursor:pointer;
+}
+.toggle b{display:block}
+.toggle small{color:var(--muted)}
+.toggle .sw{flex:0 0 auto;width:42px;height:24px;border-radius:999px;background:#202833;position:relative;transition:background .2s}
+.toggle .sw::after{content:"";position:absolute;top:3px;left:3px;width:18px;height:18px;border-radius:50%;background:#fff;transition:transform .2s}
+.toggle[aria-checked=true] .sw{background:var(--accent)}
+.toggle[aria-checked=true] .sw::after{transform:translateX(18px)}
+
+.result p{color:var(--muted)}
+footer.foot{color:var(--muted);font-size:12.5px;text-align:center;margin:26px 0}
+.dock{
+  position:fixed;left:0;right:0;bottom:0;padding:14px 20px calc(14px + env(safe-area-inset-bottom,0px));
+  background:linear-gradient(0deg,var(--bg) 60%,transparent);
+}
+.dock .btn.primary{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;max-width:720px;margin:0 auto;padding:15px;font-size:16px;border-radius:14px}
+.dock .count{font:600 12px ui-monospace,monospace;background:rgba(0,0,0,.2);border-radius:999px;padding:2px 8px}
+
+dialog{
+  background:var(--panel);color:var(--text);border:1px solid var(--line);
+  border-radius:20px;padding:24px;max-width:420px;width:calc(100% - 32px);
+}
+dialog::backdrop{background:rgba(0,0,0,.65);backdrop-filter:blur(4px)}
+dialog h3{margin-bottom:10px}
+dialog ul{padding-left:0;list-style:none;display:grid;gap:10px;margin:14px 0 18px}
+dialog li{color:var(--muted);font-size:14px}
+dialog li b{color:var(--text)}
+dialog .btn{width:100%}
+.hue-box{padding:6px 0 16px}
+.hue-box input{width:100%}
+.steps{margin:14px 0;display:grid;gap:8px}
+.steps div{display:flex;gap:10px;align-items:center;color:var(--muted);font-size:13.5px}
+.steps div.on{color:var(--text)}
+.steps i{width:8px;height:8px;border-radius:50%;background:#2a3440}
+.steps div.on i{background:var(--accent)}
+.warn{background:var(--accent-soft);border:1px solid var(--accent);border-radius:12px;padding:12px 14px;font-size:13.5px;margin-top:10px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="brand"><b>DelpharaW2A</b><small>delphara-local · menempa di perangkat</small></div>
+    <button class="swatch-btn" id="hueOpen" aria-label="Atur warna cairan"></button>
+  </header>
+
+  <h1>Tempa web jadi <em>APK</em> asli.</h1>
+  <p class="lede">Template WebView dimodifikasi langsung di perangkatmu — package, nama, ikon, splash — lalu ditandatangani ulang. Tanpa akun, tanpa unggah berkas.</p>
+
+  <section class="card" aria-labelledby="s1">
+    <h3 id="s1"><span class="num">01</span>Sumber</h3>
+    <label class="f"><span>Alamat situs</span>
+      <div class="input-with">
+        <input type="url" id="url" placeholder="https://contoh.com" inputmode="url" autocomplete="off">
+        <button class="btn" id="paste" type="button">Tempel</button>
+      </div>
+    </label>
+  </section>
+
+  <section class="card" aria-labelledby="s2">
+    <h3 id="s2"><span class="num">02</span>Identitas</h3>
+    <label class="f"><span>Nama aplikasi</span><input type="text" id="appName" value="Aplikasiku"></label>
+    <label class="f"><span>Package name</span><input type="text" id="pkg" value="com.delphara.aplikasiku" autocapitalize="none" spellcheck="false"></label>
+    <div class="row">
+      <label class="f"><span>Version code</span><input type="number" id="vcode" value="1" min="1"></label>
+      <label class="f"><span>Version name</span><input type="text" id="vname" value="1.0.0"></label>
+    </div>
+    <div class="f"><span class="hint" style="display:block;margin-bottom:8px">Ikon aplikasi 512×512</span>
+      <div class="icon-row">
+        <div class="icon-prev" id="iconPrev">A</div>
+        <div class="icon-actions">
+          <input type="file" id="iconFile" accept="image/png" class="sr">
+          <button class="btn" type="button" id="iconUp">Unggah PNG</button>
+          <button class="btn" type="button" id="iconReset">Setel ulang</button>
+          <span class="hint">Atau monogram otomatis dari nama.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="card" aria-labelledby="s3">
+    <h3 id="s3"><span class="num">03</span>Tema splash</h3>
+    <div class="chips-head"><span>16 gaya · hidup</span><span>geser →</span></div>
+    <div class="chips" id="chips" role="group" aria-label="Gaya splash"></div>
+    <label class="f" style="margin-top:6px"><span>Judul splash</span><input type="text" id="spTitle" value="Aplikasiku"></label>
+    <label class="f"><span>Subjudul</span><input type="text" id="spSub" value="Memuat…"></label>
+    <div class="f"><span class="hint" style="display:block;margin-bottom:6px">Durasi</span>
+      <div class="dur"><input type="range" id="dur" min="800" max="5000" step="100" value="2000" aria-label="Durasi splash"><output id="durOut">2000 ms</output></div>
+    </div>
+    <div class="phone" id="phone" aria-live="polite"></div>
+    <button class="btn replay" id="replay" type="button">Putar ulang</button>
+    <p class="note">Pratinjau ini gaya Delphara — tampilan akhir mengikuti gaya, teks, warna, dan durasi yang sama.</p>
+  </section>
+
+  <section class="card" aria-labelledby="s4">
+    <h3 id="s4"><span class="num">04</span>Perilaku</h3>
+    <div class="seg" id="orient" role="group" aria-label="Orientasi">
+      <button type="button" aria-pressed="true" data-v="auto">Auto</button>
+      <button type="button" aria-pressed="false" data-v="portrait">Potret</button>
+      <button type="button" aria-pressed="false" data-v="landscape">Lanskap</button>
+    </div>
+    <button class="toggle" role="switch" aria-checked="true" id="tHeader"><span><b>Header bar</b><small>Bilah judul di atas WebView.</small></span><span class="sw"></span></button>
+    <button class="toggle" role="switch" aria-checked="true" id="tJs"><span><b>JavaScript</b><small>Aktifkan JS di dalam WebView.</small></span><span class="sw"></span></button>
+    <button class="toggle" role="switch" aria-checked="true" id="tZoom"><span><b>Pinch-zoom</b><small>Izinkan zoom dengan dua jari.</small></span><span class="sw"></span></button>
+  </section>
+
+  <section class="card result" aria-labelledby="s5">
+    <h3 id="s5"><span class="num">05</span>Hasil</h3>
+    <p id="resultText">Splash "Klasik" diputar langsung.</p>
+  </section>
+
+  <footer class="foot">DelpharaW2A · mesin <b>delphara-local</b> — apa yang kamu lihat, itulah yang ditempa.</footer>
+</div>
+
+<div class="dock">
+  <button class="btn primary" id="forge" type="button">Tempa APK <span class="count">168</span></button>
+</div>
+
+<dialog id="forgeDlg">
+  <h3>Menempa APK</h3>
+  <div class="steps" id="steps">
+    <div><i></i>Langkah 1/5 · Menyiapkan template</div>
+    <div><i></i>Langkah 2/5 · Menulis identitas</div>
+    <div><i></i>Langkah 3/5 · Memasang splash &amp; ikon</div>
+    <div><i></i>Langkah 4/5 · Menandatangani ulang</div>
+    <div><i></i>Langkah 5/5 · Menyegel APK</div>
+  </div>
+  <div class="warn" id="forgeNote">Salinan HTML ini hanya memuat tampilan. Template WebView dan penandatanganan APK berjalan di server situs asli, jadi berkas .apk tidak dibuat di sini.</div>
+  <button class="btn" id="forgeClose" type="button" style="margin-top:14px">Tutup</button>
+</dialog>
+
+<dialog id="hueDlg">
+  <h3>Warna cairan</h3>
+  <p class="hint">Satu slider mengatur segalanya: aksen antarmuka, latar, warna splash, dan header APK.</p>
+  <div class="hue-box"><input type="range" id="hue" min="0" max="360" value="195" aria-label="Warna"></div>
+  <button class="btn primary" id="hueDone" type="button">Selesai</button>
+</dialog>
+
+<dialog id="howDlg">
+  <h3>Begini cara Delphara menempa</h3>
+  <p class="hint">Mesin delphara-local memodifikasi template WebView yang sudah terkompilasi, lalu menandatanganinya ulang — semuanya di perangkatmu.</p>
+  <ul>
+    <li><b>Template disiapkan</b> — koneksi aman melalui server route; sisanya diproses lokal.</li>
+    <li><b>Identitas ditulis</b> — package, nama, versi, ikon 512, splash &amp; header dari pilihanmu.</li>
+    <li><b>Ditandatangani ulang</b> — JAR v1 dengan RSA + SHA-256.</li>
+    <li><b>APK disegel</b> — berkas .apk yang benar-benar bisa dipasang.</li>
+  </ul>
+  <button class="btn primary" id="howDone" type="button">Mengerti</button>
+</dialog>
+
+<script>
+(function(){
+  var $=function(id){return document.getElementById(id)};
+  var styles=[
+    ["Klasik","classic"],["Fade","fade"],["Zoom","zoom"],["Slide","slide"],["Pantul","bounce"],
+    ["Denyut","pulse"],["Goyang","shake"],["Ketikan","type"],["Spinner","spinner"],["Progres","progress"],
+    ["Titik","dots"],["Garis","line"],["Gradasi","gradient"],["Minimal","minimal"],["Logo","logo"],["Tanpa","none"]
+  ];
+  var cur="classic", curName="Klasik", iconData=null, typeTimer=null;
+
+  // chips
+  var chips=$("chips");
+  styles.forEach(function(s,i){
+    var b=document.createElement("button");
+    b.type="button";b.className="chip";b.textContent=s[0];b.dataset.k=s[1];
+    b.setAttribute("aria-pressed",i===0?"true":"false");
+    b.onclick=function(){
+      cur=s[1];curName=s[0];
+      chips.querySelectorAll(".chip").forEach(function(c){c.setAttribute("aria-pressed",c===b?"true":"false")});
+      $("resultText").textContent='Splash "'+curName+'" diputar langsung.';
+      play();
+    };
+    chips.appendChild(b);
+  });
+
+  function monogram(){var n=$("appName").value.trim();return (n[0]||"A").toUpperCase()}
+  function logoHTML(){
+    return '<div class="sp-logo">'+(iconData?'<img alt="" src="'+iconData+'">':monogram())+'</div>';
+  }
+  function esc(t){var d=document.createElement("div");d.textContent=t;return d.innerHTML}
+
+  function play(){
+    if(typeTimer){clearInterval(typeTimer);typeTimer=null}
+    var ph=$("phone");
+    var ms=+$("dur").value;
+    var title=$("spTitle").value, sub=$("spSub").value;
+    ph.className="phone a-"+cur;
+    ph.style.setProperty("--d",ms+"ms");
+    var inner="";
+    if(cur==="none"){inner='<div class="sp"><div class="sp-sub">Tanpa splash — langsung membuka situs.</div></div>';}
+    else{
+      var showLogo=cur!=="minimal";
+      inner='<div class="sp">'+(showLogo?logoHTML():"")+
+        (cur==="logo"?"":'<div class="sp-title" id="spT">'+esc(title)+'</div>')+
+        (cur==="logo"?"":'<div class="sp-sub">'+esc(sub)+'</div>')+
+        (cur==="spinner"?'<div class="sp-spin"></div>':"")+
+        (cur==="progress"?'<div class="sp-bar"><i></i></div>':"")+
+        (cur==="dots"?'<div class="sp-dots"><i></i><i></i><i></i></div>':"")+
+        (cur==="line"?'<div class="sp-line"></div>':"")+
+      '</div>';
+    }
+    ph.innerHTML=inner;
+    // paksa animasi mulai ulang
+    void ph.offsetWidth;
+    if(cur==="type"){
+      var el=$("spT");var i=0;el.textContent="";
+      var step=Math.max(30,ms/Math.max(title.length,1)/1.4);
+      typeTimer=setInterval(function(){
+        i++;el.textContent=title.slice(0,i)+(i<title.length?"▌":"");
+        if(i>=title.length){clearInterval(typeTimer);typeTimer=null}
+      },step);
+    }
+  }
+
+  $("replay").onclick=play;
+  ["spTitle","spSub"].forEach(function(id){$(id).addEventListener("input",play)});
+  $("dur").addEventListener("input",function(){$("durOut").textContent=this.value+" ms";play()});
+
+  // identitas
+  function slug(n){return n.toLowerCase().replace(/[^a-z0-9]+/g,"")||"aplikasi"}
+  var pkgTouched=false;
+  $("pkg").addEventListener("input",function(){pkgTouched=true});
+  $("appName").addEventListener("input",function(){
+    var v=this.value;
+    if(!pkgTouched)$("pkg").value="com.delphara."+slug(v);
+    $("spTitle").value=v;
+    refreshIcon();play();
+  });
+  function refreshIcon(){
+    var p=$("iconPrev");
+    p.innerHTML=iconData?'<img alt="Ikon" src="'+iconData+'">':monogram();
+  }
+  $("iconUp").onclick=function(){$("iconFile").click()};
+  $("iconFile").addEventListener("change",function(){
+    var f=this.files[0];if(!f)return;
+    var r=new FileReader();
+    r.onload=function(){iconData=r.result;refreshIcon();play()};
+    r.readAsDataURL(f);
+  });
+  $("iconReset").onclick=function(){iconData=null;$("iconFile").value="";refreshIcon();play()};
+
+  // tempel
+  $("paste").onclick=function(){
+    if(navigator.clipboard&&navigator.clipboard.readText){
+      navigator.clipboard.readText().then(function(t){$("url").value=t.trim()}).catch(function(){$("url").focus()});
+    }else{$("url").focus()}
+  };
+
+  // perilaku
+  $("orient").querySelectorAll("button").forEach(function(b){
+    b.onclick=function(){
+      $("orient").querySelectorAll("button").forEach(function(x){x.setAttribute("aria-pressed",x===b?"true":"false")});
+    };
+  });
+  ["tHeader","tJs","tZoom"].forEach(function(id){
+    $(id).onclick=function(){this.setAttribute("aria-checked",this.getAttribute("aria-checked")==="true"?"false":"true")};
+  });
+
+  // warna cairan
+  function setHue(h){document.documentElement.style.setProperty("--hue",h);try{localStorage.setItem("dw2a-hue",h)}catch(e){}}
+  try{var sh=localStorage.getItem("dw2a-hue");if(sh!==null){$("hue").value=sh;setHue(sh)}}catch(e){}
+  $("hue").addEventListener("input",function(){setHue(this.value)});
+  $("hueOpen").onclick=function(){$("hueDlg").showModal()};
+  $("hueDone").onclick=function(){$("hueDlg").close()};
+
+  // dialog cara kerja
+  $("howDone").onclick=function(){$("howDlg").close()};
+  try{if(!localStorage.getItem("dw2a-how")){setTimeout(function(){$("howDlg").showModal();localStorage.setItem("dw2a-how","1")},400)}}catch(e){}
+
+  // tempa
+  $("forge").onclick=function(){
+    var dlg=$("forgeDlg"),steps=dlg.querySelectorAll("#steps div"),i=0;
+    steps.forEach(function(s){s.classList.remove("on")});
+    dlg.showModal();
+    (function next(){
+      if(i<steps.length){steps[i].classList.add("on");i++;setTimeout(next,450)}
+    })();
+  };
+  $("forgeClose").onclick=function(){$("forgeDlg").close()};
+
+  play();
+})();
+</script>
+</body>
+</html>
